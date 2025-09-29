@@ -19,6 +19,21 @@ class Form_Validators {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   static String? validateContact(String? value) {
     if (value == null || value.trim().isEmpty) {
       return "Contact number is required !!";
