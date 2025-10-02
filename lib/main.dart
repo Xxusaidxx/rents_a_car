@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rent_a_car_app/UserPanel/user_on_boarding.dart';
 import 'package:rent_a_car_app/admin_blocs/admin_login_bloc/admin_loginbloc.dart';
 import 'package:rent_a_car_app/AdminPartnerPanel/Admin%20Registration/screens/admin_onboarding_screen.dart';
 import 'package:rent_a_car_app/AdminPartnerPanel/admin_authentication_service.dart/login_service.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         // home: User_On_Boarding(),
         routes: AppPages.getRoutes(),
-        initialRoute: RoutesName.adminLoginScreen,
+        initialRoute: RoutesName.UseronBoarding,
       ),
     );
   }

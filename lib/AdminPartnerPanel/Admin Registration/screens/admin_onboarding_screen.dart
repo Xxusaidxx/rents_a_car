@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rent_a_car_app/AdminPartnerPanel/Admin%20Registration/screens/owner_information_form.dart';
 import 'package:rent_a_car_app/Constants/app_images.dart';
-import 'package:rent_a_car_app/Constants/app_routes.dart';
+// import 'package:rent_a_car_app/Constants/app_routes.dart';
 import 'package:rent_a_car_app/Constants/app_strings.dart';
 import 'package:rent_a_car_app/routes/routes_name.dart';
 

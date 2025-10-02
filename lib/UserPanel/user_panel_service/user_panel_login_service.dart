@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rent_a_car_app/Constants/app_routes.dart';
+// import 'package:rent_a_car_app/Constants/app_routes.dart';
 import 'package:rent_a_car_app/UserPanel/user_registration/ui_helper.dart';
+import 'package:rent_a_car_app/routes/routes_name.dart';
 
 class LoginAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -25,7 +26,7 @@ class LoginAuthService {
           backgroundColor: Colors.grey.shade900,
         ),
       );
-      Navigator.pushReplacementNamed(context, userhomescreen);
+      Navigator.pushReplacementNamed(context, RoutesName.HomeScreen);
       return true;
     } on FirebaseAuthException catch (e) {
       Uihelper.showSnackBar(context, _handleFirebaseAuthError(e));

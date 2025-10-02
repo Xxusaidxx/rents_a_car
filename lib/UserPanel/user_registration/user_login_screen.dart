@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rent_a_car_app/UserPanel/user_panel_service/user_panel_login_service.dart';
 import 'package:rent_a_car_app/UserPanel/user_registration/user_signup_screen.dart';
 import 'package:rent_a_car_app/UserPanel/user_registration/ui_helper.dart';
-import 'package:rent_a_car_app/UserPanel/bloc/login_bloc.dart';
-import 'package:rent_a_car_app/UserPanel/bloc/login_event.dart';
-import 'package:rent_a_car_app/UserPanel/bloc/login_state.dart';
+import 'package:rent_a_car_app/UserPanel/user_bloc/login_bloc.dart';
+import 'package:rent_a_car_app/UserPanel/user_bloc/login_event.dart';
+import 'package:rent_a_car_app/UserPanel/user_bloc/login_state.dart';
+import 'package:rent_a_car_app/routes/routes_name.dart';
 
 // import 'package:rent_a_car_app/main.dart';
 
@@ -59,7 +60,7 @@ class LoginPage extends StatelessWidget {
   listener: (context, state) {
     if (state is LoginSuccessState) {
       // Navigate to next screen or show success message
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, RoutesName.HomeScreen);
     } else if (state is LoginErrorState) {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(

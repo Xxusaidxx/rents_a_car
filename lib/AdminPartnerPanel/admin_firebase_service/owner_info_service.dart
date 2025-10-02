@@ -13,7 +13,7 @@ class OwnerInfoService {
     required String aboutCar,
   }) async {
     try {
-      await _firestore.collection("owner Information").add({
+      await _firestore.collection("ownerInformation").add({
         "name": name,
         "email": email,
         "phone": phone,

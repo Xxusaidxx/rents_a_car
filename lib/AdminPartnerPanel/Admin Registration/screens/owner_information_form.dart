@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -87,20 +88,43 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
-            
+
                 // Owner Information
                 // _buildTextFormField(" Full Name", nameController),
-                _buildTextField(" Full Name", nameController,validator: Form_Validators.validateName),
-                _buildTextFormField("Email Address", emailController),
-                _buildTextFormField("Contact", phoneController),
-                _buildTextFormField("Owner Id", ownerIdController),
+                _buildTextFormField(
+                  " Full Name",
+                  nameController,
+                  [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                  validator: Form_Validators.validateName,
+                ),
+                _buildTextFormField(
+                  "Email Address",
+                  emailController,
+                  [],
+                  validator: Form_Validators.validateEmail,
+                ),
+                _buildTextFormField(
+                  "Contact",
+                  phoneController,
+                  [FilteringTextInputFormatter.digitsOnly],
+                  validator: Form_Validators.validateContact,
+                ),
+                _buildTextFormField(
+                  "Owner Id",
+                  ownerIdController,
+                  [FilteringTextInputFormatter.digitsOnly],
+                  validator: Form_Validators.validateOwnerId,
+                ),
                 SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       "Car Information",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -118,7 +142,9 @@ class _OwnerInformationState extends State<OwnerInformation> {
                         child: Text(
                           "Car Brand",
                           style: TextStyle(
-                            color: !isBrandSelected ? Colors.white : Colors.black,
+                            color: !isBrandSelected
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -134,7 +160,9 @@ class _OwnerInformationState extends State<OwnerInformation> {
                         child: Text(
                           "Car Model",
                           style: TextStyle(
-                            color: !isBrandSelected ? Colors.white : Colors.black,
+                            color: !isBrandSelected
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -207,7 +235,11 @@ class _OwnerInformationState extends State<OwnerInformation> {
                       // SizedBox(width: 5),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.image, color: Colors.blueGrey, size: 28),
+                        icon: Icon(
+                          Icons.image,
+                          color: Colors.blueGrey,
+                          size: 28,
+                        ),
                       ),
                     ],
                   ),
@@ -216,6 +248,8 @@ class _OwnerInformationState extends State<OwnerInformation> {
                 _buildTextFormField(
                   "Car Registration Number",
                   carRegistrationController,
+                  [FilteringTextInputFormatter.digitsOnly],
+                  validator: Form_Validators.validateCarRegistrationNumber,
                 ),
                 SizedBox(height: 15),
                 Row(
@@ -223,7 +257,10 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   children: [
                     Text(
                       "Colors",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -251,7 +288,10 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   children: [
                     Text(
                       "Fuel Type",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -262,7 +302,7 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   ) {
                     return Row(
                       mainAxisSize: MainAxisSize.min,
-            
+
                       children: [
                         Radio(
                           value: type,
@@ -291,19 +331,31 @@ class _OwnerInformationState extends State<OwnerInformation> {
                       hintText: "Enter about your car here....",
                       border: OutlineInputBorder(),
                     ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'[a-zA-Z0-9\s.,%!-]'),
+                      ),
+                    ],
+                    validator: Form_Validators.validatecarDescription,
                   ),
                 ),
                 SizedBox(height: 5),
                 BlocConsumer<OwnerInfoBloc, OwnerInfoState>(
                   listener: (context, state) {
                     if (state is OwnerSuccessState) {
+                      nameController.clear();
+                      phoneController.clear();
+                      emailController.clear();
+                      ownerIdController.clear();
+                      carRegistrationController.clear();
+                      carDescriptionController.clear();
                       print("Successfully submitted");
                       ScaffoldMessenger.of(
                         context,
                       ).showSnackBar(SnackBar(content: Text(state.message)));
                     } else if (state is OwnerErrorState) {
                       print("Not submitted");
-            
+
                       ScaffoldMessenger.of(
                         context,
                       ).showSnackBar(SnackBar(content: Text("error: $e")));
@@ -312,25 +364,28 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   builder: (context, state) {
                     if (state is OwnerLoadingState) {
                       return Center(
-                        child: CircularProgressIndicator(color: AppColors.black),
+                        child: CircularProgressIndicator(
+                          color: AppColors.black,
+                        ),
                       );
                     }
                     return ElevatedButton(
                       onPressed: () {
-                        if(_formKey.currentState!.validate()){
+                        if (_formKey.currentState!.validate()) {
                           context.read<OwnerInfoBloc>().add(
-                          InformationSubmitEvent(
-                            name: nameController.text.trim(),
-                            email: emailController.text.trim(),
-                            phone: phoneController.text.trim(),
-                            ownerId: ownerIdController.text.trim(),
-                            carRegistrationNumber: carRegistrationController.text
-                                .trim(),
-                            aboutCar: carDescriptionController.text.trim(),
-                          ),
-                        );
-                      }
-                        },
+                            InformationSubmitEvent(
+                              name: nameController.text.trim(),
+                              email: emailController.text.trim(),
+                              phone: phoneController.text.trim(),
+                              ownerId: ownerIdController.text.trim(),
+                              carRegistrationNumber: carRegistrationController
+                                  .text
+                                  .trim(),
+                              aboutCar: carDescriptionController.text.trim(),
+                            ),
+                          );
+                        }
+                      },
                       //   context.read<OwnerInfoBloc>().add(
                       //     InformationSubmitEvent(
                       //       name: nameController.text.trim(),
@@ -355,7 +410,7 @@ class _OwnerInformationState extends State<OwnerInformation> {
                   },
                 ),
                 SizedBox(height: 15),
-            
+
                 // ElevatedButton(
                 //   onPressed: () {},
                 //   style: ElevatedButton.styleFrom(
@@ -383,23 +438,11 @@ class _OwnerInformationState extends State<OwnerInformation> {
   }
 }
 
-Widget _buildTextFormField(String label, TextEditingController controller,) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-      ),
-    ),
-  );
-}
-
-
-Widget _buildTextField(String label, TextEditingController controller,{
+Widget _buildTextFormField(
+  String label,
+  TextEditingController controller,
+  final List<TextInputFormatter>? inputFormatters, {
   String? Function(String?)? validator,
-
 }) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -409,9 +452,7 @@ Widget _buildTextField(String label, TextEditingController controller,{
         labelText: label,
         border: OutlineInputBorder(),
       ),
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
-      ],
+      inputFormatters: inputFormatters,
       validator: validator,
     ),
   );

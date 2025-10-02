@@ -19,21 +19,6 @@ class Form_Validators {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   static String? validateContact(String? value) {
     if (value == null || value.trim().isEmpty) {
       return "Contact number is required !!";
@@ -41,6 +26,7 @@ class Form_Validators {
     if (!RegExp(r'^(03[0-9]{9})$').hasMatch(value)) {
       return "Enter valid number !!";
     }
+    return null;
   }
 
   static String? validateOwnerId(String? value) {
@@ -50,5 +36,23 @@ class Form_Validators {
     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return "Please enter correct Owner_Id !!";
     }
+    return null;
+  }
+
+  static String? validateCarRegistrationNumber(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Registration Number Is Required !!";
+    }
+    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return "Please enter a correct number";
+    }
+    return null;
+  }
+
+  static String? validatecarDescription(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Description is required!!";
+    }
+    return null;
   }
 }
