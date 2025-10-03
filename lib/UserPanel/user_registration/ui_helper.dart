@@ -8,16 +8,20 @@ class Uihelper {
     bool obsecureText = false,
     IconData? prefixIcon,
     IconData? suffixIcon,
+    String? Function(String?)? validator,    
   }) {
     return TextFormField(
       controller: controller,
       obscureText: obsecureText,
+      validator: validator,
+      
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         hintText: hintText,
         labelText: labelText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
+        
       ),
     );
   }

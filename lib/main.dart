@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rent_a_car_app/UserPanel/user_on_boarding.dart';
+import 'package:rent_a_car_app/UserPanel/screens/user_on_boarding.dart';
+import 'package:rent_a_car_app/UserPanel/user_bloc/login_bloc.dart';
+import 'package:rent_a_car_app/UserPanel/user_panel_service/user_panel_login_service.dart';
 import 'package:rent_a_car_app/admin_blocs/admin_login_bloc/admin_loginbloc.dart';
 import 'package:rent_a_car_app/AdminPartnerPanel/Admin%20Registration/screens/admin_onboarding_screen.dart';
-import 'package:rent_a_car_app/AdminPartnerPanel/admin_authentication_service.dart/login_service.dart';
-import 'package:rent_a_car_app/UserPanel/user_on_boarding.dart';
+import 'package:rent_a_car_app/AdminPartnerPanel/admin_authentication_service/login_service.dart';
+import 'package:rent_a_car_app/UserPanel/screens/user_on_boarding.dart';
 import 'package:rent_a_car_app/firebase_options.dart';
 import 'package:rent_a_car_app/routes/pages.dart';
 import 'package:rent_a_car_app/routes/routes_name.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_)=> AdminLoginbloc(AdminLoginService())),
+        BlocProvider(create: (_)=>LoginBloc(LoginAuthService())),
         // BlocProvider(create: (_)=> )
       ],
       child: MaterialApp(
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         // home: User_On_Boarding(),
         routes: AppPages.getRoutes(),
-        initialRoute: RoutesName.UseronBoarding,
+        initialRoute: RoutesName.UserLoginScreen,
       ),
     );
   }

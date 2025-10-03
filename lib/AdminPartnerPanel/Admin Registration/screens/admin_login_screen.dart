@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rent_a_car_app/AdminPartnerPanel/validation_services/admin_login_validation.dart';
 import 'package:rent_a_car_app/Constants/app_colors.dart';
 import 'package:rent_a_car_app/Constants/app_images.dart';
 import 'package:rent_a_car_app/admin_blocs/admin_login_bloc/admin_login_event.dart';
@@ -13,6 +14,11 @@ class AdminLoginScreen extends StatelessWidget {
   bool loading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  
+  
   @override
   Widget build(BuildContext context) {
     return BlocListener<AdminLoginbloc, AdminLoginState>(
@@ -31,81 +37,90 @@ class AdminLoginScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(title: Text("Admin Login Page")),
-        body: Stack(
-          children: [
-            Image.asset(CarPng),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Uihelper.customText("Welcome Back"),
-                Uihelper.customText("QuickWheels Partner Program."),
-                SizedBox(height: 20),
-                _buildTextFormField(
-                  emailController,
-                  "Enter your email",
-                  false,
-                  prefixIcon: (Icons.email),
-                ),
-                _buildTextFormField(
-                  passwordController,
-                  "Enter your password",
-                  false,
-                  prefixIcon: (Icons.password),
-                ),
+        body: Form(
+          key: _formKey,
+          child: Stack(
+            children: [
+              Image.asset(CarPng),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Uihelper.customText("Welcome Back"),
+                  Uihelper.customText("QuickWheels Partner Program."),
+                  SizedBox(height: 20),
+                  _buildTextFormField(
+                    emailController,
+                    "Enter your email",
+                    false,
+                    prefixIcon: (Icons.email),
+                    validator: LoginValidationService.validateEmail,
+                  ),
+                  _buildTextFormField(
+                    passwordController,
+                    "Enter your password",
+                    false,
+                    prefixIcon: (Icons.password),
+                    validator: LoginValidationService.validatePassword,
 
-                SizedBox(height: 10),
-                SizedBox(
-                  width: 300,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      context.read<AdminLoginbloc>().add(
-                        LoginEventButton(
-                          email: emailController.text.toLowerCase(),
-                          password: passwordController.text.trim(),
-                          context: context,
+                  ),
+          
+                  SizedBox(height: 10),
+                  SizedBox(
+                    width: 300,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if(_formKey.currentState!.validate()){
+                          context.read<AdminLoginbloc>().add(
+                          LoginEventButton(
+                            email: emailController.text.toLowerCase(),
+                            password: passwordController.text.trim(),
+                            context: context,
+                          ),
+                        );
+                        }
+                        
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black26,
+                        // maximumSize: Size(25, 6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black26,
-                      // maximumSize: Size(25, 6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
                       ),
-                    ),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Image.asset(googleLogo, width: 40, height: 25),
-                  label: Text("Sign in with Google"),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot Password??",
-                        style: TextStyle(fontSize: 21),
+                  SizedBox(height: 10),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Image.asset(googleLogo, width: 40, height: 25),
+                    label: Text("Sign in with Google"),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forgot Password??",
+                          style: TextStyle(fontSize: 21),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-              ],
-            ),
-          ],
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -118,12 +133,14 @@ Widget _buildTextFormField(
   bool obsecureText, {
   IconData? prefixIcon,
   suffixIcon,
+  String? Function(String?)? validator //
 }) {
   return Padding(
     padding: const EdgeInsets.all(8),
     child: TextFormField(
       controller: controller,
       obscureText: obsecureText,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
