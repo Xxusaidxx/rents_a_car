@@ -15,7 +15,7 @@ class LoginAuthService {
   }) async {
     try {
      final trimmedEmail = email.trim();
-         final trimmedPassword = password.trim();
+      final trimmedPassword = password.trim();
 
       // email:
       // email.trim();

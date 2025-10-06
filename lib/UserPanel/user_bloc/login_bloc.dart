@@ -21,9 +21,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           LoginErrorState(message: "Login Failed");
         }
       } catch (e) {
-        LoginErrorState(message: (e.toString()));
+        emit(
+        LoginErrorState(message: (e.toString())));
       }
-    });
+    }
+    );
 
     // emit(LoginLoadingState());
   }

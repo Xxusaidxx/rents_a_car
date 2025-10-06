@@ -9,5 +9,5 @@ class LoginButtonEvent extends LoginEvent {
   final BuildContext context;
   LoginButtonEvent({required this.email, required this.password ,required this.context});
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [email, password,context];
 }
