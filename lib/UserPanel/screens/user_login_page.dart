@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   _buildTextFormField(
                     passwordController,
-                    "Enter your email:",
+                    "Enter your password:",
                     false,
                     suffixIcon: Icons.email,
                     validator: UserLoginValidationService.validatePassword,
@@ -186,7 +186,9 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.black),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Navigator.pushNamed(context, RoutesName.)
+                        },
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
