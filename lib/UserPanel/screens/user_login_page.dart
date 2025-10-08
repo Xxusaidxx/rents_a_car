@@ -88,7 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                         "  Remember Me",
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
-                      SizedBox(width: 210),
+                      // SizedBox(width: MediaQuery.of(context).size.width * 0.),
+                      Spacer(),
                       TextButton(
                         onPressed: () {},
                         child: Text(
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -125,9 +126,11 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, RoutesName.userSignupScreen);
+                    },
                     style: ElevatedButton.styleFrom(
                       // backgroundColor: Color(0xFF1E2326),
                       shape: RoundedRectangleBorder(
@@ -141,9 +144,9 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 25, color: Colors.black),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Text(
-                    "_________________ or _____________",
+                    "_________________ or _________________",
                     style: TextStyle(color: AppColors.lightgrey),
                   ),
                   SizedBox(height: 15),
@@ -187,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigator.pushNamed(context, RoutesName.)
+                          Navigator.pushNamed(context, RoutesName.userSignupScreen);
                         },
                         child: Text(
                           "Sign Up",

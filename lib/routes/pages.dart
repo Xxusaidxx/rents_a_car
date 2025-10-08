@@ -7,6 +7,7 @@ import 'package:rent_a_car_app/UserPanel/screens/home_screen.dart';
 import 'package:rent_a_car_app/UserPanel/screens/user_login_page.dart';
 import 'package:rent_a_car_app/UserPanel/screens/user_on_boarding.dart';
 import 'package:rent_a_car_app/UserPanel/screens/user_login_screen.dart';
+import 'package:rent_a_car_app/UserPanel/screens/user_signup_page.dart';
 import 'package:rent_a_car_app/routes/routes_name.dart';
 
 class AppPages {
@@ -19,6 +20,8 @@ class AppPages {
       RoutesName.HomeScreen:(context)=>HomeScreen(),
       RoutesName.UserLoginScreen:(context)=>LoginPage(),
       RoutesName.UseronBoarding:(context)=>User_On_Boarding(),
+      RoutesName.userSignupScreen:(context)=>UserSignupPage(),
+
     };
   }
 }

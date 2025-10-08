@@ -8,5 +8,6 @@ const redCar = "assets/images/redCar.jpeg";
 const niceCar = "assets/images/niceCar.jpeg";
 const googleLogo = "assets/images/go.webp";
 const appleLogo = "assets/images/apple.png";
+const brandcars = "assets/images/Group 593@3x (1).png";
 
 // const String h

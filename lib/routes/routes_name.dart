@@ -34,4 +34,5 @@ class RoutesName {
   static const String HomeScreen = "/HomeScreen";
   static const String UserLoginScreen = "/LoginPage";
   static const String UseronBoarding = "/User_On_Boarding";
+  static const String userSignupScreen = "/UserSignupPage";
 }
