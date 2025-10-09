@@ -35,4 +35,6 @@ class RoutesName {
   static const String UserLoginScreen = "/LoginPage";
   static const String UseronBoarding = "/User_On_Boarding";
   static const String userSignupScreen = "/UserSignupPage";
+    static const String ResetPasswordScreen = "/ResetPasswordScreen";
+
 }

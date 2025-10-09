@@ -12,21 +12,47 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromRGBO(10, 20, 20, 0.8),
       appBar: AppBar(
-        title: const Text(
-          "Available Cars",
-
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFFF1C40F),
-          ),
+        backgroundColor: Colors.white,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 12.0),
+          child: Image.asset(CarPng, width: 60, height: 50),
         ),
+
+        actions: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.black, // border color
+                width: 0.3, // border thickness
+              ),
+            ),
+            child: Icon(
+              Icons.notification_important_rounded,
+              size: 40,
+              color: Colors.grey,
+            ),
+          ),
+          SizedBox(width: 10),
+          Image.asset(ownerlogo, width: 55, height: 45),
+        ],
+        // title: const Text(
+        //   "Available Cars",
+
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.bold,
+        //     color: Color(0xFFF1C40F),
+        //   ),
+        // ),
         centerTitle: true,
         elevation: 3,
-        backgroundColor: Colors.blueGrey,
+        // backgroundColor: Colors.blueGrey,
       ),
 
       body: Column(
         children: [
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(

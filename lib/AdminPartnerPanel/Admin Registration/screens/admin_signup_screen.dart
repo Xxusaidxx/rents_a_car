@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_a_car_app/AdminPartnerPanel/Admin%20Registration/screens/admin_login_screen.dart';
-import 'package:rent_a_car_app/UserPanel/screens/user_login_screen.dart';
 import 'package:rent_a_car_app/UserPanel/user_registration/ui_helper.dart';
 import 'package:rent_a_car_app/routes/routes_name.dart';
 

@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         // home: User_On_Boarding(),
         routes: AppPages.getRoutes(),
         initialRoute: RoutesName.HomeScreen,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
